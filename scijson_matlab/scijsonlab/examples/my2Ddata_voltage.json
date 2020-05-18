@@ -1,0 +1,14 @@
+{
+	"row": {
+		"name": "Time",
+		"unit": "s",
+		"data": [1,2,3,4,5,6,7,8,9,10],
+		"description": ""
+	},
+	"array": {
+		"name": "Voltage",
+		"unit": "V",
+		"data": [10,10.5,9,8,6,9,12,11,10.2,9.7],
+		"description": ""
+	}
+}
