@@ -1,7 +1,7 @@
 # Scijson : Open-source json file definition to store physical metadata alongside data
 
 * Version : 0.1b
-* License : 
+* License : MIT License
 * Support : Matlab 2014 and after (Octave)
 
 
@@ -72,8 +72,8 @@ human-readable.
 A Matlab/Octrave toolbox has been developed to allow the creation, the storage 
 and the plotting of data with scijson standard.
 
-The toolbox is named scijsonlab. The files can be download here : 
-
+The toolbox is named scijsonlab. The files can be download here: 
+[scijsonlab](./scijson_matlab/README.md)
 
 ## Python Script
 
