@@ -1,4 +1,4 @@
-# Scijson : Open-source json file definition to store physical metadata alongside data
+# Scijson : Open-source json file definition to store metadata alongside data
 
 * Version : 0.1b
 * License : MIT License
@@ -12,6 +12,7 @@
 
 ## ToDo
 
+* Check floating point precision after json conversion and back
 * Write a json schema
 * Develop Python version
 * Check complex number support
@@ -28,7 +29,7 @@ The main objective of the standard is to store data and its metadata at the same
 Scijson is a [json] file with a typical structure to store data array with its 
 metadata like *name*, *unit* and optionally a *description* field. Each array 
 and its metadata is called hereafter a *sjdata* object. Find below an example of
- a *sj data* json object :
+ a *sjdata* json object :
 
 ```json
 {
@@ -41,8 +42,8 @@ and its metadata is called hereafter a *sjdata* object. Find below an example of
 
 According to the dimension of the data, several *sjdata* are used to describe 
 the dataset. For example 2 dimensions data, represented by two 1D vectors, are 
-saved in a set of several *sjdata*. Find below an example with two vectors 
-named `Time` and `Voltage`.
+saved in a set of several *sjdata*, called a *sjset*. Find below an example with
+ two vectors named `Time` and `Voltage`.
 
 ```json
 {
@@ -66,16 +67,34 @@ human-readable.
 
 [json]: https://www.json.org/json-en.html
 
+The definition is summed up here after. The *sjdata* fields are:    
 
-## Matlab Script
+| Field names |
+|-------------|
+| `name`      |
+| `unit`      |
+| `data`      |
+|`description`|
+
+The *sjset* field are, according to the dimension of data:
+
+| field names | 1D data | 2D data | 3D data |
+|-------------|:-------:|:-------:|:-------:|
+| `row`       |         | X       |   X     |
+| `col`       |         |         |   X     |
+| `array`     |  X      |  X      |   X     |
+
+
+
+## Matlab/Octave toolbox
 
 A Matlab/Octrave toolbox has been developed to allow the creation, the storage 
 and the plotting of data with scijson standard.
 
 The toolbox is named scijsonlab. The files can be download here: 
-[scijsonlab](./scijson_matlab/README.md)
+[scijsonlab](./scijson_matlab/)
 
-## Python Script
+## Python module
 
 To come.
 

@@ -1,7 +1,7 @@
-# scijsonlab : Matlab/octave toolbox to save and plot data using scijson files
+# scijsonlab : Matlab/Octave toolbox to save and plot data using scijson files
 
 * Version : 0.1b
-* License : 
+* License : MIT License
 * Support : Matlab 2014 and after (Octave compatible)
 
 
@@ -11,7 +11,7 @@
 
 ## ToDo
 
-* Check complex support
+* Check complex number support
 * Check Octave compatibility
 * Check Scilab compatibility
 * Deal with string data for row and column metadata
@@ -19,12 +19,13 @@
 
 ## scijsonlab installation
 
-This toolbox requires to install [jsonlab](https://github.com/fangq/jsonlab).
-
-Copy this folder to the user MATLAB directory for a single user installation.
+1. This toolbox requires to install [jsonlab](https://github.com/fangq/jsonlab). 
+Jsonlab is a Matlab toolbox dedicated to the writing and reading of json files.
+2. Download the folder `scijsonlab`.
+3. Copy the folder `scijsonlab` to the user MATLAB directory for a single user 
+installation.
 Or add the path to this folder in your Matlab path variable.
-
-The example file `mainsj_test.m` in `examples` shows the usage of the main 
+4. The example file `mainsj_test.m` in `examples` shows the usage of the main 
 functions of the toolbox.
 
 ## Saving data
@@ -32,8 +33,8 @@ functions of the toolbox.
 Saving data in a scijson file requires the following steps :     
 * Create a struct with the metadata and the data using the `makesjdata` function 
 for each axis of the data. The resulting struct is called a *sjdata*.
-* Create a *sj collection* of *sjdata* structs using either `makesj1D`, `makesj2D` or `makesj3D` function.
-* Save the sj collection to a json file using the `savesj` function.
+* Create a *sj collection* of *sjdata* structs using either `makesj1D`, `makesj2D` or `makesj3D` functions.
+* Save the *sj collection* to a json file using the `savesj` function.
 
 Below is an example for 1D data:
 ```matlab
@@ -81,6 +82,34 @@ sj3D_coll = makesj3D(d_sj, e_sj, score_sj);
 savesj('my3Ddata_score.json', sj3D_coll);
 ```
 
+## Loading data
+
+A scijson file is loaded by using the function `loadjson` from the *jsonlab* 
+toolbox. The returned object is a struct.
+
+```matlab
+% assuming my2Ddata_voltage.json is a scijson file
+sjvoltage = loadjson('my2Ddata_voltage.json');
+```
+
+## Accessing data
+
+The data stored in a *sjset*, is a struct with the field associated to the 
+dimension of the data.
+
+For example for a 2D *sjset* the fields are:    
+* `row`
+* `array`
+
+For each field a *sjdata* struct is stored.
+Then to access the data one can use the following script.
+
+```matlab
+sjvoltage = loadjson('my2Ddata_voltage.json');
+x = sjvoltage.row.data;
+y = sjvoltage.array.data;
+```
+
 ## Basic plotting
 
 The toolbox comes with basic plotting functions to quickly plot data saved as a *sj collection*:     
@@ -99,7 +128,7 @@ function choose the right graph (bar, 2D, 3D) according to the dimension of data
 	* contour plot projected along the rows (x) with `contoursj3D_row`
 	* contour plot projected along the columns (x) with `contoursj3D_col`
 
-For example the following command plot automatically the data stored in the `voltage2save` sj collection. The resulting graph is showed here after.
+For example the following command plot automatically the data stored in the `voltage2save` *sj collection*. The resulting graph is shown here after.
 
 ```matlab
 % plot data
